@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwjsw6maliuqh"
+path="res://.godot/imported/button_release.mp3-08effebeb1d18e5da7d4150c679221f8.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/button_release.mp3"
+dest_files=["res://.godot/imported/button_release.mp3-08effebeb1d18e5da7d4150c679221f8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

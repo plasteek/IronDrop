@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/pod_selector.gd" id="1"]
+[ext_resource type="PackedScene" path="res://components/pod.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/utils/audio_manager.gd" id="3"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/pod_spotlight.mp3" id="4"]
+
+[node name="PodSelector" type="Node2D"]
+script = ExtResource("1")
+pod_drop_wait = 2000
+pod_dropped_timeout = 3000
+
+[node name="RefPod" parent="." instance=ExtResource("2")]
+modulate = Color(1, 1, 1, 0.403922)
+self_modulate = Color(1, 1, 1, 0.341176)
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("3")
+volume_db = -10
+audio_labels = ["selection_start", "selection_end"]
+audio_sources = [ExtResource("4"), ExtResource("4")]

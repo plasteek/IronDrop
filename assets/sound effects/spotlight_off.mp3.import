@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cqasbh0ut88xw"
+path="res://.godot/imported/spotlight_off.mp3-e4a194fbf1988abdf991c136203ad928.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/spotlight_off.mp3"
+dest_files=["res://.godot/imported/spotlight_off.mp3-e4a194fbf1988abdf991c136203ad928.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

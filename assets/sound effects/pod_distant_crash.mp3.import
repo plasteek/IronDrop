@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c6u4kahq3u4wb"
+path="res://.godot/imported/pod_distant_crash.mp3-00b0e90c64875bfd3a5558a807675ab6.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/pod_distant_crash.mp3"
+dest_files=["res://.godot/imported/pod_distant_crash.mp3-00b0e90c64875bfd3a5558a807675ab6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

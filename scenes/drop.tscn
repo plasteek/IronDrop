@@ -1,0 +1,192 @@
+[gd_scene load_steps=20 format=3 uid="uid://d08wqmvv6nlvm"]
+
+[ext_resource type="Script" path="res://scripts/drop_scene.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/utils/audio_manager.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://d4i2usc5xhd6m" path="res://assets/sound effects/pod_inside_idle.mp3" id="3"]
+[ext_resource type="AudioStream" uid="uid://cgrlspv2j5ope" path="res://assets/sound effects/pod_spotlight.mp3" id="4"]
+[ext_resource type="AudioStream" uid="uid://b5p3mivub3nd6" path="res://assets/sound effects/pod_drop_init.mp3" id="5"]
+[ext_resource type="AudioStream" uid="uid://5hod52axa2dq" path="res://assets/sound effects/pod_selected.mp3" id="6"]
+[ext_resource type="AudioStream" uid="uid://d1msn57adi5g" path="res://assets/sound effects/pod_released.mp3" id="7"]
+[ext_resource type="AudioStream" uid="uid://c6u4kahq3u4wb" path="res://assets/sound effects/pod_distant_crash.mp3" id="8"]
+[ext_resource type="AudioStream" uid="uid://di0bytc754vf3" path="res://assets/sound effects/pod_inside_accelerating.mp3" id="9"]
+[ext_resource type="Texture2D" uid="uid://dcsnj8ewf6trt" path="res://assets/sprites/bg.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://bcp8w5356q4jt" path="res://assets/sprites/light_long.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://cxjt225vlpj36" path="res://assets/sprites/drop_bg.png" id="12"]
+[ext_resource type="Shader" path="res://shaders/gradient.gdshader" id="13"]
+[ext_resource type="Texture2D" uid="uid://cmjvqogkvxx1j" path="res://assets/sprites/drop_window.png" id="14"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("13")
+shader_parameter/first_color = Vector4(255, 0, 0, 0.3)
+shader_parameter/second_color = Vector4(0, 0, 0, 0)
+shader_parameter/position = 0.5
+shader_parameter/size = 1.62
+shader_parameter/angle = 180.0
+
+[sub_resource type="Animation" id="2"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Environment:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Environment:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "drop"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Environment:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Environment:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 1),
+"points": PackedFloat32Array(0, 0, 0, 0.5, 89.3149, -3761.03, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="4"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DropWindow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(584, 331), Vector2(584, 321), Vector2(584, 331), Vector2(584, 341), Vector2(584, 331)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Environment:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="5"]
+_data = {
+"RESET": SubResource("2"),
+"drop": SubResource("3"),
+"idle": SubResource("4")
+}
+
+[node name="DropScene" type="Node2D"]
+script = ExtResource("1")
+drop_tint = Color(0.580392, 0, 0, 0.164706)
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("2")
+audio_labels = Array[String](["idle", "spotlight", "init", "selected", "release", "distant_crash", "accelerating"])
+audio_sources = Array[AudioStream]([ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9")])
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(588, 331.5)
+scale = Vector2(2.97647, 3.53822)
+texture = ExtResource("10")
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="LightLong" type="Sprite2D" parent="Environment"]
+modulate = Color(1, 1, 1, 0.215686)
+position = Vector2(586, -90)
+scale = Vector2(5.40909, 5.40909)
+texture = ExtResource("11")
+
+[node name="DropBg" type="Sprite2D" parent="Environment"]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(593, 593)
+scale = Vector2(2.3212, 2.3212)
+texture = ExtResource("12")
+
+[node name="LighSelf" type="Node2D" parent="Environment"]
+position = Vector2(582, 368)
+scale = Vector2(5.06701, 5.69722)
+
+[node name="Particle" type="Sprite2D" parent="Environment/LighSelf"]
+modulate = Color(1, 1, 1, 0.215686)
+position = Vector2(23.4853, -342.272)
+scale = Vector2(6.5318, 5.80927)
+texture = ExtResource("11")
+
+[node name="Tint" type="ColorRect" parent="Environment/LighSelf"]
+offset_left = -149.0
+offset_top = -104.0
+offset_right = 151.0
+offset_bottom = 91.0
+color = Color(0.67451, 0.643137, 0, 0.0862745)
+
+[node name="OtherDeathTint" type="ColorRect" parent="."]
+visible = false
+material = SubResource("1")
+offset_left = 258.0
+offset_top = -123.0
+offset_right = 1473.0
+offset_bottom = 822.0
+color = Color(0.65098, 0.65098, 0, 0.0627451)
+
+[node name="DropWindow" type="Sprite2D" parent="."]
+position = Vector2(584, 331)
+scale = Vector2(2.50397, 2.50397)
+texture = ExtResource("14")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("5")
+}
+
+[node name="Postprocessing" type="Node2D" parent="."]
+
+[node name="POVCover" type="ColorRect" parent="Postprocessing"]
+visible = false
+offset_left = -266.0
+offset_top = -224.0
+offset_right = 1420.0
+offset_bottom = 887.0
+color = Color(0, 0, 0, 0.517647)
+
+[node name="OffCover" type="ColorRect" parent="Postprocessing"]
+visible = false
+offset_left = -229.0
+offset_top = -224.0
+offset_right = 1457.0
+offset_bottom = 887.0
+color = Color(0, 0, 0, 1)

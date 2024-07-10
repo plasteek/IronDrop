@@ -1,0 +1,371 @@
+[gd_scene load_steps=38 format=3]
+
+[ext_resource type="Script" path="res://scripts/computer.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/utils/audio_manager.gd" id="2"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/computer_boot.mp3" id="3"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/computer_ding.mp3" id="4"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/computer_static_noise.mp3" id="5"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/computer_chime.mp3" id="6"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/computer_success.mp3" id="7"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/computer_error.mp3" id="8"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/stringer1.mp3" id="9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/computer.png" id="10"]
+[ext_resource type="PackedScene" path="res://components/button.tscn" id="11"]
+[ext_resource type="Theme" path="res://themes/default_text.tres" id="12"]
+[ext_resource type="Texture2D" path="res://assets/sprites/waiting.png" id="13"]
+[ext_resource type="FontFile" path="res://assets/fonts/monogram.ttf" id="14"]
+[ext_resource type="Texture2D" path="res://assets/sprites/info.png" id="15"]
+[ext_resource type="Script" path="res://scripts/input_screen.gd" id="16"]
+[ext_resource type="Texture2D" path="res://assets/sprites/typing.png" id="17"]
+[ext_resource type="FontFile" path="res://assets/fonts/monogram-extended.ttf" id="18"]
+[ext_resource type="Script" path="res://scripts/blinking_caret.gd" id="19"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/keyboard2.mp3" id="20"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/keyboard3.mp3" id="21"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/keyboard4.mp3" id="22"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/keyboard5.mp3" id="23"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/keyboard6.mp3" id="24"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/keyboard7.mp3" id="25"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/keyboard8.mp3" id="26"]
+[ext_resource type="Texture2D" path="res://assets/sprites/screen_on.png" id="27"]
+[ext_resource type="Texture2D" path="res://assets/sprites/success.png" id="28"]
+[ext_resource type="Texture2D" path="res://assets/sprites/reject.png" id="29"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rect.png" id="30"]
+[ext_resource type="Texture2D" path="res://assets/sprites/scanline_01.png" id="31"]
+[ext_resource type="Texture2D" path="res://assets/sprites/scanline_02.png" id="32"]
+[ext_resource type="Texture2D" path="res://assets/sprites/screen_specular.png" id="33"]
+
+[sub_resource type="StyleBoxEmpty" id="1"]
+script = null
+
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+script = null
+
+[sub_resource type="Theme" id="3"]
+LineEdit/colors/caret_color = Color(0, 0.12549, 0, 0)
+LineEdit/colors/font_placeholder_color = Color(0.172549, 0.305882, 0.141176, 0.470588)
+LineEdit/constants/caret_width = 4
+LineEdit/styles/focus = SubResource("1")
+LineEdit/styles/normal = SubResource("2")
+script = null
+
+[sub_resource type="SpriteFrames" id="4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32")
+}],
+"loop": true,
+"name": &"scanline",
+"speed": 10.0
+}]
+script = null
+
+[node name="Computer" type="Node2D"]
+script = ExtResource("1")
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("2")
+volume_db = -10
+audio_labels = ["boot", "ding", "static", "chime", "success", "error", "stinger"]
+audio_sources = [ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9")]
+
+[node name="ComputerSprite" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ComputerSprite"]
+position = Vector2(49, -133)
+scale = Vector2(2.76704, 2.76704)
+texture = ExtResource("10")
+
+[node name="ReplyBtn" parent="ComputerSprite" instance=ExtResource("11")]
+position = Vector2(-285, -57)
+text = "REPLY"
+color = Color(0.98, 0.2744, 0.2744, 1)
+
+[node name="SendBtn" parent="ComputerSprite" instance=ExtResource("11")]
+position = Vector2(-154, -57)
+text = "SEND"
+color = Color(0, 0.73, 0, 1)
+
+[node name="Logo" type="Label" parent="ComputerSprite"]
+offset_left = -42.0
+offset_top = -129.0
+offset_right = 101.0
+offset_bottom = -105.0
+theme = ExtResource("12")
+theme_override_colors/font_color = Color(0, 0, 0, 0.623529)
+theme_override_font_sizes/font_size = 30
+text = "Thisa Systems"
+horizontal_alignment = 1
+
+[node name="BootScreen" type="Node2D" parent="."]
+visible = false
+
+[node name="Waiting" type="Sprite2D" parent="BootScreen"]
+position = Vector2(-179.769, -245)
+scale = Vector2(2.23077, 2.23077)
+texture = ExtResource("13")
+
+[node name="Label" type="Label" parent="BootScreen"]
+anchors_preset = -1
+anchor_left = -0.938424
+anchor_top = -0.00928365
+anchor_right = -0.938424
+anchor_bottom = -0.00928365
+offset_left = -133.769
+offset_top = -274.0
+offset_right = 130.231
+offset_bottom = -223.0
+theme_override_colors/font_color = Color(0.333333, 0.313726, 0.309804, 1)
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 64
+text = "IronDrop OS"
+metadata/_edit_use_anchors_ = true
+
+[node name="MessageScreen" type="Node2D" parent="."]
+
+[node name="Decor" type="Label" parent="MessageScreen"]
+anchors_preset = -1
+anchor_left = -0.938424
+anchor_top = -0.00928365
+anchor_right = -0.938424
+anchor_bottom = -0.00928365
+offset_left = -226.0
+offset_top = -305.0
+offset_right = 38.0
+offset_bottom = -254.0
+theme_override_colors/font_color = Color(0.333333, 0.313726, 0.309804, 1)
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 48
+text = "Received Message"
+
+[node name="Msg" type="Label" parent="MessageScreen"]
+anchors_preset = -1
+anchor_left = -0.938424
+anchor_top = -0.00928365
+anchor_right = -0.938424
+anchor_bottom = -0.00928365
+offset_left = -291.0
+offset_top = -246.0
+offset_right = 179.0
+offset_bottom = -171.0
+theme_override_colors/font_color = Color(0.333333, 0.313726, 0.309804, 1)
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 36
+text = "Some example text from ai"
+horizontal_alignment = 2
+autowrap_mode = 3
+justification_flags = 131
+clip_text = true
+
+[node name="Sprite2D" type="Sprite2D" parent="MessageScreen"]
+modulate = Color(0.64, 0.5856, 0.544, 1)
+position = Vector2(-259.375, -283.625)
+scale = Vector2(2.27941, 2.27941)
+texture = ExtResource("15")
+
+[node name="Line2D" type="Line2D" parent="MessageScreen"]
+position = Vector2(-197, 191)
+points = PackedVector2Array(-86, -442, 374.245, -442)
+width = 2.0
+default_color = Color(0.427451, 0.372549, 0.337255, 1)
+
+[node name="InputScreen" type="Node2D" parent="."]
+visible = false
+script = ExtResource("16")
+
+[node name="Label" type="Label" parent="InputScreen"]
+anchors_preset = -1
+anchor_left = -0.938424
+anchor_top = -0.00928365
+anchor_right = -0.938424
+anchor_bottom = -0.00928365
+offset_left = -226.0
+offset_top = -305.0
+offset_right = 38.0
+offset_bottom = -254.0
+theme_override_colors/font_color = Color(0.333333, 0.313726, 0.309804, 1)
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 48
+text = "TO: COMMS01-A2"
+
+[node name="Typing" type="Sprite2D" parent="InputScreen"]
+modulate = Color(0.64, 0.5856, 0.544, 1)
+position = Vector2(-259.375, -283.625)
+scale = Vector2(2.27941, 2.27941)
+texture = ExtResource("17")
+
+[node name="UserInput" type="LineEdit" parent="InputScreen"]
+offset_left = -291.0
+offset_top = -249.0
+offset_right = 164.0
+offset_bottom = -187.0
+theme = SubResource("3")
+theme_override_colors/font_color = Color(0.172324, 0.306161, 0.140789, 1)
+theme_override_fonts/font = ExtResource("18")
+theme_override_font_sizes/font_size = 48
+placeholder_text = "Type Message Here"
+alignment = 2
+max_length = 25
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+flat = true
+
+[node name="Line2D" type="Line2D" parent="InputScreen"]
+position = Vector2(-197, 191)
+points = PackedVector2Array(-86, -442, 374.245, -442)
+width = 2.0
+default_color = Color(0.427451, 0.372549, 0.337255, 1)
+
+[node name="Caret" type="ColorRect" parent="InputScreen"]
+offset_left = 170.0
+offset_top = -233.0
+offset_right = 177.0
+offset_bottom = -196.0
+color = Color(0.172549, 0.305882, 0.141176, 1)
+script = ExtResource("19")
+
+[node name="AudioManager" type="Node" parent="InputScreen"]
+script = ExtResource("2")
+volume_db = -3
+audio_labels = ["key_1", "key_2", "key_3", "key_4", "key_5", "key_6", "key_7"]
+audio_sources = [ExtResource("20"), ExtResource("21"), ExtResource("22"), ExtResource("23"), ExtResource("24"), ExtResource("25"), ExtResource("26")]
+
+[node name="WaitScreen" type="Node2D" parent="."]
+visible = false
+
+[node name="Waiting" type="Sprite2D" parent="WaitScreen"]
+position = Vector2(-235.769, -245)
+scale = Vector2(2.23077, 2.23077)
+texture = ExtResource("13")
+
+[node name="Label" type="Label" parent="WaitScreen"]
+anchors_preset = -1
+anchor_left = -0.938424
+anchor_top = -0.00928365
+anchor_right = -0.938424
+anchor_bottom = -0.00928365
+offset_left = -189.769
+offset_top = -274.0
+offset_right = 170.231
+offset_bottom = -223.0
+theme_override_colors/font_color = Color(0.333333, 0.313726, 0.309804, 1)
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 64
+text = "Waiting Reply.."
+metadata/_edit_use_anchors_ = true
+
+[node name="Success" type="Node2D" parent="."]
+visible = false
+
+[node name="ScreenOn" type="Sprite2D" parent="Success"]
+position = Vector2(-51.5, -247.5)
+scale = Vector2(1.79293, 1.46552)
+texture = ExtResource("27")
+
+[node name="Reject2" type="Sprite2D" parent="Success"]
+position = Vector2(-184, -246)
+scale = Vector2(2.34615, 2.34615)
+texture = ExtResource("28")
+
+[node name="Label" type="Label" parent="Success"]
+anchors_preset = -1
+anchor_left = -0.938424
+anchor_top = -0.00928365
+anchor_right = -0.938424
+anchor_bottom = -0.00928365
+offset_left = -138.0
+offset_top = -268.0
+offset_right = 126.0
+offset_bottom = -217.0
+theme_override_colors/font_color = Color(0, 0.623529, 0.0352941, 1)
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 48
+text = "Successful!"
+metadata/_edit_use_anchors_ = true
+
+[node name="Fail" type="Node2D" parent="."]
+visible = false
+
+[node name="ScreenOn" type="Sprite2D" parent="Fail"]
+position = Vector2(-51.5, -247.5)
+scale = Vector2(1.79293, 1.46552)
+texture = ExtResource("27")
+
+[node name="Reject2" type="Sprite2D" parent="Fail"]
+position = Vector2(-184, -246)
+scale = Vector2(2.34615, 2.34615)
+texture = ExtResource("29")
+
+[node name="Label" type="Label" parent="Fail"]
+anchors_preset = -1
+anchor_left = -0.938424
+anchor_top = -0.00928365
+anchor_right = -0.938424
+anchor_bottom = -0.00928365
+offset_left = -138.0
+offset_top = -267.0
+offset_right = 126.0
+offset_bottom = -216.0
+theme_override_colors/font_color = Color(0.623529, 0.117647, 0, 1)
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 48
+text = "Invalid Action"
+metadata/_edit_use_anchors_ = true
+
+[node name="LockScreen" type="Node2D" parent="."]
+visible = false
+
+[node name="Blocker" type="Sprite2D" parent="LockScreen"]
+modulate = Color(0.0470588, 0.0470588, 0.0470588, 1)
+position = Vector2(-54.1029, -247.5)
+scale = Vector2(1.69439, 0.816667)
+texture = ExtResource("30")
+
+[node name="Waiting" type="Sprite2D" parent="LockScreen"]
+position = Vector2(-134, -249)
+scale = Vector2(2.23077, 2.23077)
+texture = ExtResource("13")
+
+[node name="Label" type="Label" parent="LockScreen"]
+anchors_preset = -1
+anchor_left = -0.938424
+anchor_top = -0.00928365
+anchor_right = -0.938424
+anchor_bottom = -0.00928365
+offset_left = -85.0
+offset_top = -276.0
+offset_right = 275.0
+offset_bottom = -225.0
+theme_override_colors/font_color = Color(0.333333, 0.313726, 0.309804, 1)
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 64
+text = "Locked"
+metadata/_edit_use_anchors_ = true
+
+[node name="PostProcessing" type="Node2D" parent="."]
+
+[node name="Scanline" type="AnimatedSprite2D" parent="PostProcessing"]
+position = Vector2(-54.95, -249.375)
+scale = Vector2(2.66818, 2.66818)
+sprite_frames = SubResource("4")
+animation = &"scanline"
+autoplay = "scanline"
+
+[node name="ScreenSpecular" type="Sprite2D" parent="PostProcessing"]
+position = Vector2(-54.25, -308.186)
+scale = Vector2(2.70361, 2.70361)
+texture = ExtResource("33")
+
+[connection signal="button_clicked" from="ComputerSprite/ReplyBtn" to="." method="_on_reply_btn_button_clicked"]
+[connection signal="button_clicked" from="ComputerSprite/SendBtn" to="." method="_on_send_btn_button_clicked"]
+[connection signal="focus_entered" from="InputScreen/UserInput" to="InputScreen/UserInput" method="_on_focus_entered"]
+[connection signal="gui_input" from="InputScreen/UserInput" to="InputScreen/UserInput" method="_on_gui_input"]
+[connection signal="text_changed" from="InputScreen/UserInput" to="InputScreen/UserInput" method="_on_text_changed"]

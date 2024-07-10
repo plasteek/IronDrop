@@ -1,0 +1,7 @@
+res://scenes/drop.tscn
+res://themes/default_text.tres
+res://themes/label_with_bg.tres
+res://scenes/main_game.tscn
+res://scenes/main_menu.tscn
+res://scenes/playground.tscn
+res://scenes/victory.tscn

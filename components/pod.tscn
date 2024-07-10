@@ -1,0 +1,156 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scripts/target_pod.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/light_long.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chain.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/pod_cropped.png" id="4"]
+[ext_resource type="Script" path="res://scripts/utils/audio_manager.gd" id="5"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/pod_mouse_hover.mp3" id="6"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/pod_selected.mp3" id="7"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/pod_drop_init.mp3" id="8"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/pod_distant_crash.mp3" id="9"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/pod_released.mp3" id="10"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(201.75, 370.5)
+script = null
+
+[sub_resource type="Animation" id="2"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PodAnchor:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PodAnchor:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-324, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PodAnchor:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PodAnchor/ChainPodAnchor:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+script = null
+
+[sub_resource type="Animation" id="3"]
+resource_name = "idle_swing"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PodAnchor:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0),
+"points": PackedFloat32Array(0.0522875, 0, 0, 0.8, -0.00575557, -0.0513127, -0.769141, 0.00166773, 0.8, 0.00396995, 0.0517795, -1.2, -0.0029453, 0, 0),
+"times": PackedFloat32Array(0, 2, 4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PodAnchor/ChainPodAnchor:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.0753098, -0.25, 0, 1.1, 0.000493422, -0.0179304, -1.29738, 0.00345335, 1.50262, 0.00115112, 0.0753098, -1.10241, -0.00321434, 0.25, 0),
+"times": PackedFloat32Array(0, 2, 4)
+}
+script = null
+
+[sub_resource type="AnimationLibrary" id="4"]
+_data = {
+"RESET": SubResource("2"),
+"idle_swing": SubResource("3")
+}
+script = null
+
+[node name="TargetPod" type="Node2D"]
+script = ExtResource("1")
+drop_acceleration = 750
+
+[node name="Idle" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.568627)
+position = Vector2(0, -183)
+scale = Vector2(2.79753, 2.79753)
+texture = ExtResource("2")
+
+[node name="Selected" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.601324, 0, 0.11869, 1)
+position = Vector2(0, -183)
+scale = Vector2(2.79753, 2.79753)
+texture = ExtResource("2")
+
+[node name="PodAnchor" type="Node2D" parent="."]
+position = Vector2(-4, -324)
+
+[node name="Chain" type="Sprite2D" parent="PodAnchor"]
+position = Vector2(-1, 66)
+scale = Vector2(3.18963, 3.18963)
+texture = ExtResource("3")
+
+[node name="ChainPodAnchor" type="Node2D" parent="PodAnchor"]
+position = Vector2(-0.853585, 134.448)
+scale = Vector2(2.94231, 2.94231)
+
+[node name="PodSprite" type="Sprite2D" parent="PodAnchor/ChainPodAnchor"]
+position = Vector2(0.896667, 34.3571)
+texture = ExtResource("4")
+
+[node name="ClickArea2D" type="Area2D" parent="."]
+position = Vector2(0, -12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea2D"]
+position = Vector2(1, -155.25)
+shape = SubResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("5")
+volume_db = -10
+audio_labels = ["hover", "selected", "drop_init", "drop_crash", "drop_release"]
+audio_sources = [ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("4")
+}
+
+[connection signal="input_event" from="ClickArea2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="ClickArea2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="ClickArea2D" to="." method="_on_area_2d_mouse_exited"]

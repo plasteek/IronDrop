@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/announcer.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/announcer.png" id="2"]
+[ext_resource type="Theme" path="res://themes/label_with_bg.tres" id="3"]
+[ext_resource type="Script" path="res://scripts/label_shake.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/utils/audio_manager.gd" id="5"]
+[ext_resource type="AudioStream" path="res://assets/sound effects/keyboard3.mp3" id="6"]
+
+[node name="Announcer" type="Node2D"]
+script = ExtResource("1")
+type_sound = "res://assets/sound effects/keyboard2.mp3"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.90735e-06, -66)
+scale = Vector2(2.57534, 2.57534)
+texture = ExtResource("2")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_left = -1.0
+offset_top = -214.0
+offset_bottom = -176.0
+
+[node name="Label" type="Label" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3")
+theme_override_colors/font_color = Color(0.678944, 0.678944, 0.678944, 1)
+theme_override_font_sizes/font_size = 48
+vertical_alignment = 1
+text_direction = 1
+script = ExtResource("4")
+max_offset = 2.0
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("5")
+audio_labels = ["typing"]
+audio_sources = [ExtResource("6")]

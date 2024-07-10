@@ -1,0 +1,204 @@
+[gd_scene load_steps=22 format=3 uid="uid://cqusmh5meyntt"]
+
+[ext_resource type="Script" path="res://scripts/game_master.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dcsnj8ewf6trt" path="res://assets/sprites/bg.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c5wnawefvgv3q" path="res://assets/sprites/bg_player.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bqe50o7ryma6y" path="res://assets/sprites/rect.png" id="4"]
+[ext_resource type="PackedScene" path="res://components/pod_selector.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://bcrplr63nd5mh" path="res://assets/sprites/table.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cym0153l48i10" path="res://assets/sprites/radio.png" id="7"]
+[ext_resource type="PackedScene" path="res://components/counter.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://components/computer.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://components/announcer.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://b8g17vrajd1e4" path="res://assets/sprites/cctv.png" id="11"]
+[ext_resource type="Script" path="res://scripts/prompt_builder/actor_prompt_builder.gd" id="12"]
+[ext_resource type="Script" path="res://scripts/states/money.gd" id="13"]
+[ext_resource type="Script" path="res://scripts/states/computer.gd" id="14"]
+[ext_resource type="Script" path="res://scripts/states/pod_selector.gd" id="15"]
+[ext_resource type="Script" path="res://scripts/lsm/agent.gd" id="16"]
+[ext_resource type="Script" path="res://scripts/lsm/persona.gd" id="17"]
+[ext_resource type="PackedScene" uid="uid://d08wqmvv6nlvm" path="res://scenes/drop.tscn" id="18"]
+[ext_resource type="Script" path="res://scripts/utils/audio_manager.gd" id="19"]
+[ext_resource type="AudioStream" uid="uid://c1vkvadg110uj" path="res://assets/sound effects/ambience1.mp3" id="20"]
+[ext_resource type="AudioStream" uid="uid://cgrlspv2j5ope" path="res://assets/sound effects/pod_spotlight.mp3" id="21"]
+
+[node name="MainGame" type="Node2D" node_paths=PackedStringArray("personas")]
+script = ExtResource("1")
+max_pod = 4
+conversation_timeout = 120000
+personas = [NodePath("NPC/Personas/Rose"), NodePath("NPC/Personas/Isabella"), NodePath("NPC/Personas/Augustine"), NodePath("NPC/Personas/Mateo"), NodePath("NPC/Personas/Romanov"), NodePath("NPC/Personas/Alberta")]
+metadata/_edit_group_ = true
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(596, 323)
+scale = Vector2(3.18989, 3.20248)
+texture = ExtResource("2")
+
+[node name="BGPlayer" type="Node2D" parent="."]
+
+[node name="BgPlayer" type="Sprite2D" parent="BGPlayer"]
+modulate = Color(1, 1, 1, 0.737255)
+position = Vector2(618, 233)
+scale = Vector2(2.65, 2.65)
+texture = ExtResource("3")
+
+[node name="Rect" type="Sprite2D" parent="BGPlayer"]
+modulate = Color(0.0470588, 0.0470588, 0.0470588, 1)
+position = Vector2(677, 600)
+scale = Vector2(6.26875, 3.51111)
+texture = ExtResource("4")
+
+[node name="PodSelector" parent="." instance=ExtResource("5")]
+position = Vector2(596, 260)
+margin_x = 30
+
+[node name="Table" type="Sprite2D" parent="."]
+position = Vector2(618, 523)
+scale = Vector2(2.94057, 2.94057)
+texture = ExtResource("6")
+
+[node name="Radio" type="Sprite2D" parent="."]
+position = Vector2(1234, 431)
+scale = Vector2(3.09455, 3.09455)
+texture = ExtResource("7")
+
+[node name="Counter" parent="." instance=ExtResource("8")]
+position = Vector2(248, 439)
+
+[node name="Computer" parent="." instance=ExtResource("9")]
+position = Vector2(808, 603)
+boot_timeout = 3000
+
+[node name="Announcer" parent="." instance=ExtResource("10")]
+position = Vector2(248, 603)
+delay_per_chara = 30
+short_pause_timeout = 50
+
+[node name="Cctv" type="Sprite2D" parent="."]
+position = Vector2(-21, 423)
+scale = Vector2(3.27465, 3.27465)
+texture = ExtResource("11")
+
+[node name="NPC" type="Node" parent="."]
+
+[node name="ActorPromptBuilder" type="Node" parent="NPC"]
+script = ExtResource("12")
+markup_style = 1
+
+[node name="LlamaGD" type="LlamaGD" parent="NPC"]
+model_path = "models/kappa-3-phi-abliterated.Q4_K_M.gguf"
+context_size = 4096
+max_token = 500
+output_eos = true
+top_k = 10
+
+[node name="NPCState" type="Node" parent="NPC"]
+
+[node name="MoneyState" type="Node" parent="NPC/NPCState"]
+script = ExtResource("13")
+
+[node name="ComputerState" type="Node" parent="NPC/NPCState" node_paths=PackedStringArray("computer")]
+script = ExtResource("14")
+computer = NodePath("../../../Computer")
+
+[node name="PodSelectorState" type="Node" parent="NPC/NPCState"]
+script = ExtResource("15")
+
+[node name="Agent" type="Node" parent="NPC" node_paths=PackedStringArray("persona", "states", "llama", "prompt_builder")]
+unique_name_in_owner = true
+script = ExtResource("16")
+persona = NodePath("../Personas/Rose")
+states = [NodePath("../NPCState/MoneyState"), NodePath("../NPCState/ComputerState"), NodePath("../NPCState/PodSelectorState")]
+max_history = 50
+llama = NodePath("../LlamaGD")
+prompt_builder = NodePath("../ActorPromptBuilder")
+few_shot_file = "res://templates/few_shot_singulars.json"
+verbose = true
+
+[node name="Personas" type="Node" parent="NPC"]
+
+[node name="Rose" type="Node" parent="NPC/Personas"]
+script = ExtResource("17")
+persona_name = "Rose"
+attributes = "helpful, friendly, short-tempered, smart, intelligent, cusses a lot"
+profile = "Rose is a young lady, that is although noble, is a very spoiled and deliquent child	"
+guidance = "- Please be curious about the user and asks information about them to use against them
+- Please only respond only to \"Event to Handle\" and use \"History\" as a reference for your action
+- Please
+
+"
+goal = "Get money and survive"
+knowledge = "I'm playing IronDrop, a game where my opponent and I take turns dropping each other's pods. If I drop their pod, they die; if they drop mine, I die. Surviving together earns us $250 each round, and we aim to reach $1000 each. If I reach $500, the game master said he'll double my money, allowing me to eliminate my opponent sooner. I need to gauge my opponent's intentions through our computer conversations—whether they aim to collaborate or sabotage me."
+
+[node name="Isabella" type="Node" parent="NPC/Personas"]
+script = ExtResource("17")
+persona_name = "Isabella"
+attributes = "arrogant, stingy, rude, disrespectful, ignorant"
+profile = "Isabella is a spoiled kid from a rich family, which was abandoned in the street. Although poor, her bratty attitude has not disappear"
+guidance = "- Please be curious about the user and asks information about them to use against them
+- Please only respond only to \"Event to Handle\" and use \"History\" as a reference for your action"
+goal = "Get as much money as possible and survive"
+knowledge = "I'm playing IronDrop, a game where my opponent and I take turns dropping each other's pods. If I drop their pod, they die; if they drop mine, I die. Surviving together earns us $250 each round, and we aim to reach $1000 each. If I reach $500, the game master said he'll double my money, allowing me to eliminate my opponent sooner. I need to gauge my opponent's intentions through our computer conversations—whether they aim to collaborate or sabotage me."
+
+[node name="Augustine" type="Node" parent="NPC/Personas"]
+script = ExtResource("17")
+persona_name = "Augustine"
+attributes = "cold, calculating, strategic, short-tempered, witty"
+profile = "Augustine is one of the original game designer. She joins the game to kill people for fun."
+guidance = "- Please be curious about the user and asks information about them to use against them
+- Please use inappropriate language, such as cursing to taunt your opponents
+- Please refrain from explaining the game design to the opponent
+- Please only respond only to \"Event to Handle\" and use \"History\" as a reference for your action
+"
+goal = "Kill opponent"
+knowledge = "I'm playing IronDrop, a game where my opponent and I take turns dropping each other's pods. If I drop their pod, they die; if they drop mine, I die. Surviving together earns us $250 each round, and we aim to reach $1000 each. If I reach $500, the game master said he'll double my money, allowing me to eliminate my opponent sooner. I need to gauge my opponent's intentions through our computer conversations—whether they aim to collaborate or sabotage me."
+
+[node name="Mateo" type="Node" parent="NPC/Personas"]
+script = ExtResource("17")
+persona_name = "Mateo"
+attributes = "charismatic, manipulative, kind, caring, cocky"
+profile = "Mateo is an infamous multi-millionare that made money by illegal means"
+guidance = "- Please taunt the opponent and poke their personal information
+- Please only respond only to \"Event to Handle\" and use \"History\" as a reference for your action
+"
+goal = "Kill the opponent"
+knowledge = "I'm playing IronDrop, a game where my opponent and I take turns dropping each other's pods. If I drop their pod, they die; if they drop mine, I die. Surviving together earns us $250 each round, and we aim to reach $1000 each. If I reach $500, the game master said he'll double my money, allowing me to eliminate my opponent sooner. I need to gauge my opponent's intentions through our computer conversations—whether they aim to collaborate or sabotage me."
+
+[node name="Romanov" type="Node" parent="NPC/Personas"]
+script = ExtResource("17")
+persona_name = "Romanov"
+attributes = "self-aware, charismatic, care, kind, comedic"
+profile = "Romanov is aware that he is a video game character. He is here just to troll the player."
+guidance = "- Please only respond only to \"Event to Handle\" and use \"History\" as a reference for your action"
+goal = "Chill with the opponent/player"
+knowledge = "I'm playing IronDrop, a game where my opponent and I take turns dropping each other's pods. If I drop their pod, they die; if they drop mine, I die. Surviving together earns us $250 each round, and we aim to reach $1000 each. If I reach $500, the game master said he'll double my money, allowing me to eliminate my opponent sooner. I need to gauge my opponent's intentions through our computer conversations—whether they aim to collaborate or sabotage me."
+
+[node name="Alberta" type="Node" parent="NPC/Personas"]
+script = ExtResource("17")
+persona_name = "Alberta"
+attributes = "grumpy, hateful, grumpy, manipulative, reckless"
+profile = "Alberta is an undergraduate student who game to this game to earn money"
+guidance = "- Please use a lot of curse word to annoy the player
+- Please try not to kill the opponent until they try to kill you, then please be aggressive and attempt to seek revenge.
+- Please only respond only to \"Event to Handle\" and use \"History\" as a reference for your action
+
+"
+goal = "Collaborate with opponent and survive"
+knowledge = "I'm playing IronDrop, a game where my opponent and I take turns dropping each other's pods. If I drop their pod, they die; if they drop mine, I die. Surviving together earns us $250 each round, and we aim to reach $1000 each. If I reach $500, the game master said he'll double my money, allowing me to eliminate my opponent sooner. I need to gauge my opponent's intentions through our computer conversations—whether they aim to collaborate or sabotage me."
+
+[node name="DropScene" parent="." instance=ExtResource("18")]
+visible = false
+
+[node name="CameraMain" type="Camera2D" parent="."]
+position = Vector2(568, 311)
+limit_left = -171
+limit_top = -62
+limit_right = 1368
+limit_bottom = 674
+position_smoothing_enabled = true
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("19")
+volume_db = -30
+audio_labels = Array[String](["ambience", "spotlight"])
+audio_sources = Array[AudioStream]([ExtResource("20"), ExtResource("21")])

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b0f3fksmaifwo"
+path="res://.godot/imported/computer_error.mp3-d120c4dd3183a640e46b303a966904ba.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/computer_error.mp3"
+dest_files=["res://.godot/imported/computer_error.mp3-d120c4dd3183a640e46b303a966904ba.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

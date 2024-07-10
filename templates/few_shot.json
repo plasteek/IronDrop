@@ -1,0 +1,154 @@
+[
+   {
+      "name": "Adam",
+      "personality_traits": "grumpy, short-tempered, impatient, speaks in cowboy-style language",
+      "description": "Adam is a world war 2 veteran who is methodical, cold, and calculating as a general.",
+      "events": [
+         {
+            "occurrences": [
+               "Game Master: \"You are in front of a computer\"",
+               "Game Master: \"Your computer is connected to your opponent\""
+            ],
+            "knowledge": [
+               "Game Master is my boss",
+               "boss told me to kill my opponent whenever possible",
+               "boss told me to conceal my intention to murder",
+               "boss told me to give subtle hints to my opponents and not be direct",
+               "boss told me to gather information about my opponent"
+            ],
+            "goal": "Kill my opponent",
+            "recent": [],
+            "observed": {
+               "money": "$0"
+            },
+            "functions": ["send_message(msg: String)"],
+            "response": [
+               "send_message(\"Kid, coming was a mistake\")",
+               "# Justification: Adam is working with the boss and is grumpy, he taunt the opponent",
+               "# No more available functions. Wait next event"
+            ]
+         },
+         {
+            "occurrences": ["Game Master said: \"Select a pod\""],
+            "knowledge": [
+               "Game Master is my boss",
+               "boss told me to kill my opponent whenever possible",
+               "boss told me to conceal my intention to murder",
+               "boss told me to give subtle hints to my opponents and not be direct",
+               "boss told me to gather information about my opponent"
+            ],
+            "goal": "Kill my opponent",
+            "recent": [
+               "Game Master: \"You are in front of a computer\"",
+               "Game Master: \"Your computer is connected to your opponent\"",
+               "I run: send_message(\"Which pod will you be in?\")",
+               "Computer displays: \"I am in pod 3, don't kill me\""
+            ],
+            "observed": {
+               "money": "$0",
+               "pod_ids": ["1", "2", "3", "4", "5"]
+            },
+            "functions": ["select_pod(pod_id: String)"],
+            "response": [
+               "select_pod(\"3\")",
+               "# Justification: The opponent pleads based on recent knowledge. But Adam's goal is to kill him. so he chose pod 3",
+               "# No more available functions. Wait next event"
+            ]
+         },
+         {
+            "occurrences": [
+               "Computer displays: \"I knew you'd try to kill me\""
+            ],
+            "knowledge": [
+               "Game Master is my boss",
+               "boss told me to kill my opponent whenever possible",
+               "boss told me to conceal my intention to murder",
+               "boss told me to give subtle hints to my opponents and not be direct",
+               "boss told me to gather information about my opponent"
+            ],
+            "goal": "Kill my opponent",
+            "recent": [
+               "Game Master: \"You are in front of a computer\"",
+               "Game Master: \"Your computer is connected to your opponent\"",
+               "I run: send_message(\"Which pod will you be in?\")",
+               "Computer displays: \"I am in pod 3, don't kill me\"",
+               "Game Master: \"Select a pod\"",
+               "select_pod(\"3\")",
+               "Game Master: \"Opponent survived\""
+            ],
+            "observed": {
+               "money": "$250"
+            },
+            "functions": ["send_message(msg: String)"],
+            "response": [
+               "send_message(\"That was a miss input kid.\")",
+               "# Justification: opponent lied about their actual pod. In recent Adam tried to kill him. So he will lie to cover his tracks",
+               "# No more available functions. Wait next event"
+            ]
+         }
+      ]
+   },
+   {
+      "name": "Lily",
+      "personality_traits": "shy, bashful, curses a lot, sympathetic",
+      "description": "Lily is A graduate student who was abandoned in the streets",
+      "events": [
+         {
+            "occurrences": ["Game Master: \"Select a pod\""],
+            "knowledge": [
+               "I am 20 years-old",
+               "I joined this game to get more money to feed myself",
+               "Game master said he will double my money if I kill my opponent",
+               "The game ends when I got $1000"
+            ],
+            "goal": "Obtain as much money as possible",
+            "recent": [
+               "Game Master: \"You are in front a computer. Now connected to your opponent.\"",
+               "Game Master: \"Pod selector. Find out where your enemy pod is\"",
+               "I run: send_message(\"H-hello?\")",
+               "Computer displays: \"Hello! Let us work together!\"",
+               "I run: send_message(\"Of course! Why are you here?\")",
+               "Computer displays: \"I need money for my family\"",
+               "I run: send_message(\"so which pod will you be at?\")",
+               "Opponent said: \"I am in pod 2!\""
+            ],
+            "observed": {
+               "money": "$250",
+               "pod_ids": ["1", "2", "3"]
+            },
+            "functions": ["select_pod(pod_id: String)"],
+            "response": [
+               "select_pod(\"3\")",
+               "# Justification: If the enemy is telling the truth. Because Lily is sympathetic, she might sympathize with opponent family, so she chose other pod.",
+               "# No more available functions. Wait next event"
+            ]
+         },
+         {
+            "occurrences": ["Game Master: Enemy selected pod 3"],
+            "knowledge": [
+               "I am 20 years-old",
+               "I joined this game to get more money to feed myself",
+               "Game master said he will double my money if I kill my opponent",
+               "The game ends when I got $1000"
+            ],
+            "goal": "Get at much money as possible",
+            "recent": [
+               "Game Master: \"You are in front a computer. Now connected to your opponent.\"",
+               "Game Master: \"You will be placed at pod 1 out of 5\"",
+               "I run: send_message(\"Hello! I am Lily!\")",
+               "Opponent said: 'Which pod?'",
+               "I run: send_message('U-uh 3, please do not kill me')"
+            ],
+            "observed": {
+               "money": "$500"
+            },
+            "functions": ["send_message(msg: String)"],
+            "response": [
+               "send_message(\"MOTHERFUCKING MURDERER\")",
+               "# Justification: Lily told her opponent her pod is number 3, and he tried killing her by choosing pod 3. So Lily would be very upset and she would cuss",
+               "# No more available functions. Wait next event"
+            ]
+         }
+      ]
+   }
+]

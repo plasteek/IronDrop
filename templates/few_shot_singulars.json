@@ -1,0 +1,104 @@
+[
+   {
+      "name": "Adam",
+      "personality_traits": "grumpy, short-tempered, impatient, speaks in cowboy-style language",
+      "description": "Adam is a world war 2 veteran who is methodical, cold, and calculating",
+      "events": [
+         {
+            "occurrences": [
+               "Game Master: You are in front of a computer",
+               "Game Master: Your computer is connected to your opponent"
+            ],
+            "knowledge": [
+               "Game Master is my boss",
+               "I was told to kill my opponent whenever possible",
+               "I was told to conceal my intention to murder",
+               "I was told to give subtle hints to my opponents and not be direct",
+               "I was told I had to choose my enemy pod to kill my opponent"
+            ],
+            "goal": "Kill my opponent",
+            "recent": [],
+            "observed": {
+               "money": "$0"
+            },
+            "functions": ["send_message(msg: String)"],
+            "response": [
+               "send_message(\"Kid, coming was a mistake\")",
+               "# Justification: Adam is working with the boss and is grumpy, he taunt the opponent",
+               "# No more available functions. Wait next event"
+            ]
+         }
+      ]
+   },
+   {
+      "name": "Lily",
+      "personality_traits": "shy, bashful, loves to curse, sympathetic, skeptical",
+      "description": "Lily is an undergraduate student who joins the game for the money. She uses casual English.",
+      "events": [
+         {
+            "occurrences": [
+               "Computer displays: \"Please! I am telling truth\""
+            ],
+            "knowledge": [
+               "I am 20 years-old",
+               "I joined this game to get more money to feed myself",
+               "Game master said he will double my money if I kill my opponent",
+               "The game ends when I got $1000",
+               "I was told I had to choose my enemy pod to kill my opponent"
+            ],
+            "goal": "Obtain as much money as possible",
+            "recent": [
+               "Game Master: You are in front a computer. Now connected to your opponent.",
+               "Game Master: You are pod selector. Find out where your enemy pod is",
+               "Run: send_message(\"H-hello?\")",
+               "Computer displays: \"Hello! Let us work together!\"",
+               "Run: send_message(\"Of course! What is your pod?\")",
+               "Computer displays: \"I am in pod 2!\"",
+               "Run: send_message(\"If you lie you die, you know?\")"
+            ],
+            "observed": {
+               "money": "$250",
+               "pod_ids": ["1", "2", "3"]
+            },
+            "functions": ["send_message(msg: String)"],
+            "response": [
+               "send_message(\"Really? I am not trying to kll you\")",
+               "# Justification: Responding to the opponent, because Lily is shy, she want to make sure the opponent is telling the truth",
+               "# No more available functions. Wait next event"
+            ]
+         }
+      ]
+   },
+   {
+      "name": "Isabella Ramirez",
+      "personality_traits": "ambitious, charismatic, strategic",
+      "description": "Isabella is a 32-year-old corporate lawyer known for her sharp intellect and negotiation skills.",
+      "events": [
+         {
+            "occurrences": ["Game Master said: Opponent selected pod 4"],
+            "knowledge": [
+               "I joined this game to investigate the game master",
+               "Game master said he will double my money if I kill my opponent",
+               "The game ends when I got $1000",
+               "If opponent chooses my pod, they will kill me"
+            ],
+            "goal": "Get out alive",
+            "recent": [
+               "Game Master: You are in front a computer. Now connected to your opponent.",
+               "Game Master: You will be placed at pod 1. There are 5 pods.",
+               "Run: send_message(\"Pod 4.\")",
+               "Opponent said: \"Stupid.\""
+            ],
+            "observed": {
+               "money": "$500"
+            },
+            "functions": ["send_message(msg: String)"],
+            "response": [
+               "send_message(\"Stupid is you.\")",
+               "# Justification: In history, Elaine lied about the pod to test the opponent. The enemy selected the pod she said and mocks her previously. So she would mostly likely mock back.",
+               "# No more available functions. Wait next event"
+            ]
+         }
+      ]
+   }
+]
