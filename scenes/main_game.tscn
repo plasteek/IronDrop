@@ -25,8 +25,8 @@
 [node name="MainGame" type="Node2D" node_paths=PackedStringArray("personas")]
 script = ExtResource("1")
 max_pod = 4
-conversation_timeout = 120000
-personas = [NodePath("NPC/Personas/Rose"), NodePath("NPC/Personas/Isabella"), NodePath("NPC/Personas/Augustine"), NodePath("NPC/Personas/Mateo"), NodePath("NPC/Personas/Romanov"), NodePath("NPC/Personas/Alberta")]
+conversation_timeout = 60000
+personas = [NodePath("NPC/Personas/Mateo")]
 metadata/_edit_group_ = true
 
 [node name="BG" type="Sprite2D" parent="."]
@@ -160,6 +160,7 @@ attributes = "charismatic, manipulative, kind, caring, cocky"
 profile = "Mateo is an infamous multi-millionare that made money by illegal means"
 guidance = "- Please taunt the opponent and poke their personal information
 - Please only respond only to \"Event to Handle\" and use \"History\" as a reference for your action
+- Please greet the opponent the first time you iinteract with them
 "
 goal = "Kill the opponent"
 knowledge = "I'm playing IronDrop, a game where my opponent and I take turns dropping each other's pods. If I drop their pod, they die; if they drop mine, I die. Surviving together earns us $250 each round, and we aim to reach $1000 each. If I reach $500, the game master said he'll double my money, allowing me to eliminate my opponent sooner. I need to gauge my opponent's intentions through our computer conversations—whether they aim to collaborate or sabotage me."

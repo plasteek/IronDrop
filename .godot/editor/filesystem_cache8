@@ -1,16 +1,16 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1720606176
-llama.log::TextFile::-1::1720606053::0::1::::<><>::
+::res://::1723699361
+llama.log::TextFile::-1::1723644535::0::1::::<><>::
 ::res://addons/::1720603471
 ::res://addons/llama.gd/::1720603471
 llama.gd.gdextension::GDExtension::-1::1716108765::0::1::::<><>::
-::res://addons/llama.gd/bin/::1720606172
+::res://addons/llama.gd/bin/::1723699356
 ::res://assets/::1720603471
 ::res://assets/fonts/::1720606024
 monogram-extended-italic.ttf::FontFile::2850172230606842256::1716316283::1720606024::1::::<><>::
 monogram-extended.ttf::FontFile::3444584406033948993::1716316282::1720606024::1::::<><>::
 monogram.ttf::FontFile::5240907489232950115::1622982286::1720606024::1::::<><>::
-::res://assets/sound effects/::1720607514
+::res://assets/sound effects/::1720607518
 ambience1.mp3::AudioStreamMP3::6641747911352788869::1720598294::1720606024::1::::<><>::
 button_press.mp3::AudioStreamMP3::3917122167368747222::1720600833::1720606024::1::::<><>::
 button_release.mp3::AudioStreamMP3::6336709167321701863::1720600910::1720606024::1::::<><>::
@@ -89,15 +89,16 @@ counter.tscn::PackedScene::-1::1720606053::0::1::::<><>::res://scripts/counter.g
 fade_transition.tscn::PackedScene::-1::1720598677::0::1::::<><>::res://scripts/fade_transition.gd
 pod.tscn::PackedScene::-1::1720606053::0::1::::<><>::res://scripts/target_pod.gd<>res://assets/sprites/light_long.png<>res://assets/sprites/chain.png<>res://assets/sprites/pod_cropped.png<>res://scripts/utils/audio_manager.gd<>res://assets/sound effects/pod_mouse_hover.mp3<>res://assets/sound effects/pod_selected.mp3<>res://assets/sound effects/pod_drop_init.mp3<>res://assets/sound effects/pod_distant_crash.mp3<>res://assets/sound effects/pod_released.mp3
 pod_selector.tscn::PackedScene::-1::1720606053::0::1::::<><>::res://scripts/pod_selector.gd<>res://components/pod.tscn<>res://scripts/utils/audio_manager.gd<>res://assets/sound effects/pod_spotlight.mp3
-::res://models/::1720603471
+::res://models/::1723643863
 ::res://pcache/::1720603473
-::res://scenes/::1720606182
-drop.tscn::PackedScene::8983472618174615098::1720606182::0::1::::<><>::res://scripts/drop_scene.gd<>res://scripts/utils/audio_manager.gd<>uid://d4i2usc5xhd6m::::res://assets/sound effects/pod_inside_idle.mp3<>uid://cgrlspv2j5ope::::res://assets/sound effects/pod_spotlight.mp3<>uid://b5p3mivub3nd6::::res://assets/sound effects/pod_drop_init.mp3<>uid://5hod52axa2dq::::res://assets/sound effects/pod_selected.mp3<>uid://d1msn57adi5g::::res://assets/sound effects/pod_released.mp3<>uid://c6u4kahq3u4wb::::res://assets/sound effects/pod_distant_crash.mp3<>uid://di0bytc754vf3::::res://assets/sound effects/pod_inside_accelerating.mp3<>uid://dcsnj8ewf6trt::::res://assets/sprites/bg.png<>uid://bcp8w5356q4jt::::res://assets/sprites/light_long.png<>uid://cxjt225vlpj36::::res://assets/sprites/drop_bg.png<>res://shaders/gradient.gdshader<>uid://cmjvqogkvxx1j::::res://assets/sprites/drop_window.png
-main_game.tscn::PackedScene::5938265170631683789::1720606182::0::1::::<><>::res://scripts/game_master.gd<>uid://dcsnj8ewf6trt::::res://assets/sprites/bg.png<>uid://c5wnawefvgv3q::::res://assets/sprites/bg_player.png<>uid://bqe50o7ryma6y::::res://assets/sprites/rect.png<>res://components/pod_selector.tscn<>uid://bcrplr63nd5mh::::res://assets/sprites/table.png<>uid://cym0153l48i10::::res://assets/sprites/radio.png<>res://components/counter.tscn<>res://components/computer.tscn<>res://components/announcer.tscn<>uid://b8g17vrajd1e4::::res://assets/sprites/cctv.png<>res://scripts/prompt_builder/actor_prompt_builder.gd<>res://scripts/states/money.gd<>res://scripts/states/computer.gd<>res://scripts/states/pod_selector.gd<>res://scripts/lsm/agent.gd<>res://scripts/lsm/persona.gd<>uid://d08wqmvv6nlvm::::res://scenes/drop.tscn<>res://scripts/utils/audio_manager.gd<>uid://c1vkvadg110uj::::res://assets/sound effects/ambience1.mp3<>uid://cgrlspv2j5ope::::res://assets/sound effects/pod_spotlight.mp3
-main_menu.tscn::PackedScene::546380339430370500::1720606182::0::1::::<><>::res://scripts/main_menu.gd<>uid://cmjvqogkvxx1j::::res://assets/sprites/drop_window.png<>uid://psifyt0nybhg::::res://assets/sprites/logo.png<>uid://dbxmhut0taak5::::res://themes/default_text.tres<>res://components/fade_transition.tscn<>uid://bm1ky8jaexn1d::::res://assets/sound effects/main_menu_ambience.mp3<>res://scripts/audio_with_delay.gd<>uid://hsji317svkkh::::res://assets/sprites/pod_cropped.png
-playground.tscn::PackedScene::6161384901849988900::1720606182::0::1::::<><>::res://scripts/playground.gd<>uid://d08wqmvv6nlvm::::res://scenes/drop.tscn
-victory.tscn::PackedScene::3145934053008937429::1720606182::0::1::::<><>::res://scripts/victory_screen.gd<>uid://dcsnj8ewf6trt::::res://assets/sprites/bg.png<>uid://bcrplr63nd5mh::::res://assets/sprites/table.png<>uid://dbxmhut0taak5::::res://themes/default_text.tres<>res://components/announcer.tscn<>res://components/button.tscn<>res://scripts/utils/audio_manager.gd<>uid://kek7hehemje0::::res://assets/sound effects/victory_enter.mp3<>uid://dbt1ttadsdih::::res://assets/sound effects/stringer1.mp3<>uid://c6v6fl5ve2wgk::::res://assets/sound effects/victory_ambience.mp3<>res://components/fade_transition.tscn
-::res://scripts/::1720603474
+::res://scenes/::1723644464
+drop.tscn::PackedScene::8983472618174615098::1723644464::0::1::::<><>::res://scripts/drop_scene.gd<>res://scripts/utils/audio_manager.gd<>uid://d4i2usc5xhd6m::::res://assets/sound effects/pod_inside_idle.mp3<>uid://cgrlspv2j5ope::::res://assets/sound effects/pod_spotlight.mp3<>uid://b5p3mivub3nd6::::res://assets/sound effects/pod_drop_init.mp3<>uid://5hod52axa2dq::::res://assets/sound effects/pod_selected.mp3<>uid://d1msn57adi5g::::res://assets/sound effects/pod_released.mp3<>uid://c6u4kahq3u4wb::::res://assets/sound effects/pod_distant_crash.mp3<>uid://di0bytc754vf3::::res://assets/sound effects/pod_inside_accelerating.mp3<>uid://dcsnj8ewf6trt::::res://assets/sprites/bg.png<>uid://bcp8w5356q4jt::::res://assets/sprites/light_long.png<>uid://cxjt225vlpj36::::res://assets/sprites/drop_bg.png<>res://shaders/gradient.gdshader<>uid://cmjvqogkvxx1j::::res://assets/sprites/drop_window.png
+main_game.tscn::PackedScene::5938265170631683789::1723644464::0::1::::<><>::res://scripts/game_master.gd<>uid://dcsnj8ewf6trt::::res://assets/sprites/bg.png<>uid://c5wnawefvgv3q::::res://assets/sprites/bg_player.png<>uid://bqe50o7ryma6y::::res://assets/sprites/rect.png<>res://components/pod_selector.tscn<>uid://bcrplr63nd5mh::::res://assets/sprites/table.png<>uid://cym0153l48i10::::res://assets/sprites/radio.png<>res://components/counter.tscn<>res://components/computer.tscn<>res://components/announcer.tscn<>uid://b8g17vrajd1e4::::res://assets/sprites/cctv.png<>res://scripts/prompt_builder/actor_prompt_builder.gd<>res://scripts/states/money.gd<>res://scripts/states/computer.gd<>res://scripts/states/pod_selector.gd<>res://scripts/lsm/agent.gd<>res://scripts/lsm/persona.gd<>uid://d08wqmvv6nlvm::::res://scenes/drop.tscn<>res://scripts/utils/audio_manager.gd<>uid://c1vkvadg110uj::::res://assets/sound effects/ambience1.mp3<>uid://cgrlspv2j5ope::::res://assets/sound effects/pod_spotlight.mp3
+main_menu.tscn::PackedScene::546380339430370500::1723644464::0::1::::<><>::res://scripts/main_menu.gd<>uid://cmjvqogkvxx1j::::res://assets/sprites/drop_window.png<>uid://psifyt0nybhg::::res://assets/sprites/logo.png<>uid://dbxmhut0taak5::::res://themes/default_text.tres<>res://components/fade_transition.tscn<>uid://bm1ky8jaexn1d::::res://assets/sound effects/main_menu_ambience.mp3<>res://scripts/audio_with_delay.gd<>uid://hsji317svkkh::::res://assets/sprites/pod_cropped.png
+playground.tscn::PackedScene::6161384901849988900::1723644464::0::1::::<><>::res://scripts/playground.gd<>uid://d08wqmvv6nlvm::::res://scenes/drop.tscn
+testing.tscn::PackedScene::1094373701249902215::1723644464::0::1::::<><>::res://scripts/testing.gd
+victory.tscn::PackedScene::3145934053008937429::1723644464::0::1::::<><>::res://scripts/victory_screen.gd<>uid://dcsnj8ewf6trt::::res://assets/sprites/bg.png<>uid://bcrplr63nd5mh::::res://assets/sprites/table.png<>uid://dbxmhut0taak5::::res://themes/default_text.tres<>res://components/announcer.tscn<>res://components/button.tscn<>res://scripts/utils/audio_manager.gd<>uid://kek7hehemje0::::res://assets/sound effects/victory_enter.mp3<>uid://dbt1ttadsdih::::res://assets/sound effects/stringer1.mp3<>uid://c6v6fl5ve2wgk::::res://assets/sound effects/victory_ambience.mp3<>res://components/fade_transition.tscn
+::res://scripts/::1723643584
 announcer.gd::GDScript::-1::1720606054::0::1::::<>Node2D<>::
 audio_with_delay.gd::GDScript::-1::1720606054::0::1::::AutoplayWithDelay<>AudioStreamPlayer<>::
 blinking_caret.gd::GDScript::-1::1720606054::0::1::::<>ColorRect<>::
@@ -115,6 +116,7 @@ main_menu.gd::GDScript::-1::1720606054::0::1::::<>Node2D<>::
 playground.gd::GDScript::-1::1720606054::0::1::::<>Node2D<>::
 pod_selector.gd::GDScript::-1::1720606053::0::1::::PodSelector<>Node2D<>::
 target_pod.gd::GDScript::-1::1720606053::0::1::::<>Node2D<>::
+testing.gd::GDScript::-1::1723644405::0::1::::<>Node2D<>::
 victory_screen.gd::GDScript::-1::1720606053::0::1::::<>Node2D<>::
 ::res://scripts/compiler_tools/::1720603474
 parser.gd::GDScript::-1::1720606054::0::1::::LALRParser<>RefCounted<>::
@@ -170,6 +172,6 @@ gradient.gdshader::Shader::-1::1720606053::0::1::::<><>::
 few_shot.json::JSON::-1::1720606053::0::1::::<><>::
 few_shot_singulars.json::JSON::-1::1720606053::0::1::::<><>::
 few_shot_singulars_all.json::JSON::-1::1720606053::0::1::::<><>::
-::res://themes/::1720606182
-default_text.tres::Theme::7277673768510805378::1720606182::0::1::::<><>::uid://bpct2jafue5rh::::res://assets/fonts/monogram-extended.ttf<>uid://cgwy8lveslih4::::res://assets/fonts/monogram.ttf
-label_with_bg.tres::Theme::7166773484118811874::1720606182::0::1::::<><>::uid://bpct2jafue5rh::::res://assets/fonts/monogram-extended.ttf<>uid://cgwy8lveslih4::::res://assets/fonts/monogram.ttf
+::res://themes/::1723659300
+default_text.tres::Theme::7277673768510805378::1723659300::0::1::::<><>::uid://bpct2jafue5rh::::res://assets/fonts/monogram-extended.ttf<>uid://cgwy8lveslih4::::res://assets/fonts/monogram.ttf
+label_with_bg.tres::Theme::7166773484118811874::1723659300::0::1::::<><>::uid://bpct2jafue5rh::::res://assets/fonts/monogram-extended.ttf<>uid://cgwy8lveslih4::::res://assets/fonts/monogram.ttf
