@@ -1,4 +1,4 @@
-./src/pcache
-./src/models
-./src/addons
-./src/llama.log
+src/pcache
+src/models
+src/addons
+src/llama.log
