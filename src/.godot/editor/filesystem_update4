@@ -6,4 +6,3 @@ res://scenes/main_menu.tscn
 res://scenes/playground.tscn
 res://scenes/victory.tscn
 res://scenes/testing.tscn
-res://scripts/lsm/agent.gd

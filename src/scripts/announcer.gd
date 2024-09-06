@@ -4,7 +4,7 @@ extends Node2D
 @export var hold_timeout := 1000
 
 @export_group("Sounds")
-@export_file var type_sound = null
+@export_file var type_sound := ""
 
 @export_group("Tempo")
 @export var delay_per_chara := 65
